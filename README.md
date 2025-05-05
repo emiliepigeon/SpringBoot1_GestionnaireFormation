@@ -143,7 +143,8 @@ _________________________________________________________________________
 
 #### ATTENTION => TO DO
 # pour une meilleur logique mon formateur:
-Ne conseil de séparer l'utilisateur et le role...
+ME conseil de séparer l'utilisateur et le role...
+# => TO DO
 Pour lèinstant j'injecte le role dans l'utilisateur.
 
 _______________________________________________________________________
@@ -189,4 +190,4 @@ GestionnaireFormation/
 _________________________________________________________________________
 
 Lundi 05 mai 2025 
-# Jour présenciel en centre
+Jour présenciel en centre
