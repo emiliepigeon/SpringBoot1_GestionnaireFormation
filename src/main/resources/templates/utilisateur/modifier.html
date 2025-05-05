@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Modifier un utilisateur</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <h1>Modifier l'utilisateur</h1>
+
+    <form th:action="@{'/utilisateur/modifier/' + ${utilisateur.id}}" th:object="${utilisateur}" method="post">
+        <!-- CSRF désactivé temporairement -->
+        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+
+        <label>Matricule:
+            <input type="text" th:field="*{matricule}" required />
+        </label><br/>
+
+        <label>Nom:
+            <input type="text" th:field="*{nom}" required />
+        </label><br/>
+
+        <label>Prénom:
+            <input type="text" th:field="*{prenom}" required />
+        </label><br/>
+
+        <label>Email:
+            <input type="email" th:field="*{adresseMail}" required />
+        </label><br/>
+
+        <label>Adresse postale:
+            <input type="text" th:field="*{adressePostal}" required />
+        </label><br/>
+
+        <label>Code postal:
+            <input type="text" th:field="*{codePostal}" required />
+        </label><br/>
+
+        <label>Ville:
+            <input type="text" th:field="*{ville}" required />
+        </label><br/>
+
+        <label>Mot de passe:
+            <input type="password" th:field="*{motDePasse}" required />
+        </label><br/>
+
+        <label>Statut:
+            <select th:field="*{statut}">
+                <option th:value="true" th:selected="${utilisateur.statut} == true">Actif</option>
+                <option th:value="false" th:selected="${utilisateur.statut} == false">Inactif</option>
+            </select>
+        </label><br/>
+
+        <label>Rôle:
+            <select name="roleId" required>
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.libelle}"
+                        th:selected="${utilisateur.role != null} ? ${role.id} == ${utilisateur.role.id} : false"></option>
+            </select>
+        </label><br/>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <a th:href="@{/utilisateur/liste}">Retour à la liste</a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+    <!-- Lien vers le CSS commun -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <h1>Bienvenue sur l'application Gestionnaire de Formation</h1>
+    <ul>
+        <!-- Lien vers la liste des utilisateurs -->
+        <li>
+            <a th:href="@{/utilisateur/liste}">Voir la liste des utilisateurs</a>
+        </li>
+    </ul>
+</body>
+</html>

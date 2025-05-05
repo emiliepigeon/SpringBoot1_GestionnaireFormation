@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Fichier de configuration Maven (pom.xml)
+    Ce fichier décrit la structure, les dépendances et la configuration de build de ton projet Java/Spring Boot.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Version du modèle Maven (toujours 4.0.0 pour les projets modernes) -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        Bloc <parent> : Hérite de la configuration par défaut de Spring Boot
+        - Gère les versions des dépendances
+        - Fournit des plugins et des paramètres adaptés à Spring Boot
+        - Ici, on utilise la version 3.2.4 de Spring Boot
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/> <!-- Recherche le parent dans les repositories Maven -->
+    </parent>
+
+    <!--
+        Informations générales sur le projet
+        - groupId : identifiant unique du groupe (souvent le nom de domaine inversé)
+        - artifactId : nom unique du projet
+        - version : version actuelle du projet (SNAPSHOT = en développement)
+        - name/description : informations pour la documentation
+    -->
+    <groupId>com.emi</groupId>
+    <artifactId>GestionnaireFormation</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>GestionnaireFormation</name>
+    <description>Demo project for Spring Boot</description>
+
+    <!--
+        Propriétés globales du projet
+        - Ici, on précise la version de Java à utiliser (21)
+        - Tu dois avoir le JDK 21 installé sur ta machine
+    -->
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+
+    <!--
+        Liste des dépendances utilisées dans le projet
+        Chaque <dependency> ajoute une bibliothèque externe ou un module Spring Boot
+    -->
+    <dependencies>
+        <!--
+            Spring Boot Starter Data JPA
+            - Permet d'utiliser JPA/Hibernate pour la persistance des données
+            - Nécessaire pour interagir avec la base de données relationnelle
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--
+            Spring Boot Starter Web
+            - Permet de créer des applications web et des API REST
+            - Ajoute Tomcat embarqué pour lancer le serveur HTTP
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--
+            Spring Boot DevTools
+            - Fournit le rechargement automatique à chaud (hot reload)
+            - Pratique pour le développement, à ne pas utiliser en production
+            - Scope "runtime" : utilisé uniquement à l'exécution
+            - Optionnel : ne bloque pas le build si absent
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!--
+            MySQL Connector/J
+            - Le driver JDBC pour se connecter à une base de données MySQL
+            - Scope "runtime" : utilisé uniquement à l'exécution (pas pendant la compilation)
+        -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+            Spring Boot Starter Test
+            - Fournit les outils pour écrire des tests unitaires et d'intégration
+            - Scope "test" : utilisé uniquement pendant les phases de test
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+            Spring Boot Starter Thymeleaf
+            - Permet de générer des pages HTML côté serveur avec le moteur de template Thymeleaf
+            - Utile si tu veux faire des vues web dynamiques (MVC)
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency> -->
+        
+    </dependencies>
+
+    <!--
+        Configuration du build Maven
+        - Liste des plugins utilisés pour compiler, tester, empaqueter et exécuter le projet
+    -->
+    <build>
+        <plugins>
+            <!--
+                Plugin Spring Boot Maven
+                - Permet de lancer l'application avec "mvn spring-boot:run"
+                - Permet de générer un JAR exécutable pour déployer l'application
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

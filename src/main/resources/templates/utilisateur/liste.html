@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <h1>Liste des utilisateurs</h1>
+
+    <!-- Messages flash -->
+    <div th:if="${success}" class="alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert-error" th:text="${error}"></div>
+
+    <a th:href="@{/utilisateur/ajouter}" class="btn">Ajouter un utilisateur</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Statut</th>
+                <th>Rôle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="utilisateur : ${utilisateurs}">
+                <td th:text="${utilisateur.matricule}">Matricule</td>
+                <td th:text="${utilisateur.nom}">Nom</td>
+                <td th:text="${utilisateur.prenom}">Prénom</td>
+                <td th:text="${utilisateur.adresseMail}">Email</td>
+                <td>
+                    <span th:text="${utilisateur.statut} ? 'Actif' : 'Inactif'"></span>
+                    <form th:if="${utilisateur.statut}" th:action="@{'/utilisateur/desactiver/' + ${utilisateur.id}}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="put" />
+                        <!-- CSRF désactivé temporairement -->
+                        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+                        <button type="submit" class="btn btn-delete" onclick="return confirm('Désactiver cet utilisateur ?');">Désactiver</button>
+                    </form>
+                    <form th:if="${!utilisateur.statut}" th:action="@{'/utilisateur/activer/' + ${utilisateur.id}}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="put" />
+                        <!-- CSRF désactivé temporairement -->
+                        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+                        <button type="submit" class="btn btn-activate" onclick="return confirm('Activer cet utilisateur ?');">Activer</button>
+                    </form>
+                </td>
+                <td>
+                    <span th:text="${utilisateur.role != null ? utilisateur.role.libelle : 'Aucun'}"></span>
+                    <form th:action="@{'/utilisateur/modifier-role/' + ${utilisateur.id}}" method="post" style="display:inline;">
+                        <!-- CSRF désactivé temporairement -->
+                        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+                        <select name="roleId" required>
+                            <option th:each="role : ${roles}" 
+                                    th:value="${role.id}" 
+                                    th:text="${role.libelle}" 
+                                    th:selected="${utilisateur.role != null} ? ${role.id} == ${utilisateur.role.id} : false">
+                            </option>
+                        </select>
+                        <button type="submit" class="btn btn-edit">Changer</button>
+                    </form>
+                </td>
+                <td>
+                    <a th:href="@{'/utilisateur/modifier/' + ${utilisateur.id}}" class="btn btn-edit">Modifier</a>
+                    <a th:href="@{'/utilisateur/supprimer/' + ${utilisateur.id}}" class="btn btn-delete" onclick="return confirm('Supprimer cet utilisateur ?');">Supprimer</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
